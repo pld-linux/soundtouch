@@ -25,7 +25,7 @@ odtwarzania d¼wiêku cyfrowego.
 Summary:	Header files for SoundTouch library
 Summary(pl):	Pliki nag³ówkowe biblioteki SoundTouch
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
 
 %description devel
@@ -38,7 +38,7 @@ Pliki nag³ówkowe biblioteki SoundTouch.
 Summary:	Static SoundTouch library
 Summary(pl):	Statyczna biblioteka SoundTouch
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static SoundTouch library.
@@ -51,7 +51,7 @@ Summary:	SoundStretch - sound processing application
 Summary(pl):	SoundStretch - aplikacja do przetwarzania d¼wiêku
 Group:		Applications/Sound
 URL:		http://www.sunpoint.net/~oparviai/soundtouch/soundstretch.html
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description soundstretch
 SoundStretch is a command-line application for changing tempo, pitch
