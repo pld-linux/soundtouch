@@ -95,7 +95,7 @@ install include/*.h $RPM_BUILD_ROOT%{_includedir}/SoundTouch
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p /sbin/ldconfig	
+%post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
 %files
