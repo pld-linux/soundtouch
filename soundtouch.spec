@@ -10,6 +10,7 @@ Source0:	http://www.sunpoint.net/~oparviai/soundtouch/%{name}_v%{version}.zip
 URL:		http://www.sunpoint.net/~oparviai/soundtouch/soundstretch.html
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
+BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
