@@ -1,12 +1,12 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl):	SoundTouch - biblioteka do przetwarzania d¼wiêku
 Name:		soundtouch
-Version:	1.1
+Version:	1.1.1
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://www.sunpoint.net/~oparviai/soundtouch/%{name}_v%{version}.zip
-# Source0-md5:	ddd089db15627471cede0b4e8ff9f0f5
+# Source0-md5:	c154b7d3b9c3145297ee359b6d14e3d3
 URL:		http://www.sunpoint.net/~oparviai/soundtouch/soundstretch.html
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.4d
@@ -26,6 +26,7 @@ Summary:	Header files for SoundTouch library
 Summary(pl):	Pliki nag³ówkowe biblioteki SoundTouch
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
+Requires:	libstdc++-devel
 
 %description devel
 Header files for SoundTouch library.
@@ -69,28 +70,28 @@ SoundTouch do przetwarzania d¼wiêku we w³asnych programach.
 
 %build
 # try to abuse makefiles :)
-%{__make} -C source/libSoundTouch -f makefile.gcc \
+%{__make} -C source/SoundTouch -f makefile.gcc \
 	CC="libtool --mode=compile --tag=CXX %{__cxx}" \
 	FLAGS="-I../../include %{rpmcflags}" \
 	LINK=/bin/true
 
-libtool --mode=link %{__cxx} %{rpmldflags} -o lib/libSoundTouch.la \
-	source/libSoundTouch/*.lo -rpath %{_libdir}
+libtool --mode=link %{__cxx} %{rpmldflags} -o libSoundTouch.la \
+	source/SoundTouch/*.lo -rpath %{_libdir}
 
-%{__make} -C source/soundstretch -f makefile.gcc \
+%{__make} -C source/example/SoundStretch -f makefile.gcc \
 	main.o RunParameters.o WavFile.o BPMDetect.o PeakFinder.o \
 	CC="%{__cxx}" \
-	FLAGS="-I../../include %{rpmcflags}"
+	FLAGS="-I../../../include %{rpmcflags}"
 
-libtool --mode=link %{__cxx} %{rpmldflags} -o bin/soundstretch \
-	source/soundstretch/*.o lib/libSoundTouch.la
+libtool --mode=link %{__cxx} %{rpmldflags} -o soundstretch \
+	source/example/SoundStretch/*.o libSoundTouch.la
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/SoundTouch}
 
-libtool --mode=install install lib/libSoundTouch.la $RPM_BUILD_ROOT%{_libdir}
-libtool --mode=install install bin/soundstretch $RPM_BUILD_ROOT%{_bindir}
+libtool --mode=install install libSoundTouch.la $RPM_BUILD_ROOT%{_libdir}
+libtool --mode=install install soundstretch $RPM_BUILD_ROOT%{_bindir}
 install include/*.h $RPM_BUILD_ROOT%{_includedir}/SoundTouch
 
 %clean
