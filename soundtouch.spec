@@ -1,17 +1,25 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl):	SoundTouch - biblioteka do przetwarzania d¼wiêku
 Name:		soundtouch
-Version:	1.1.1
+Version:	1.3.0
 Release:	1
-License:	GPL
+License:	LGPL
 Group:		Libraries
-Source0:	http://www.sunpoint.net/~oparviai/soundtouch/%{name}_v%{version}.zip
-# Source0-md5:	c154b7d3b9c3145297ee359b6d14e3d3
-URL:		http://www.sunpoint.net/~oparviai/soundtouch/soundstretch.html
+Source0:	http://sky.prohosting.com/oparviai/soundtouch/%{name}_v%{version}.zip
+# Source0-md5:	5c2d3f54320e5197885b3462f5f35a15
+Patch0:		%{name}-am18.patch
+Patch1:		%{name}-optflags.patch
+Patch2:		%{name}-link.patch
+URL:		http://sky.prohosting.com/oparviai/soundtouch/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtool >= 2:1.4d
+BuildRequires:	libtool >= 2:1.5
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+# gcc runs out of regs in mmx_gcc.cpp
+%define		specflags_ia32	-fomit-frame-pointer
 
 %description
 SoundTouch is a library for changing tempo, pitch and playback rate of
@@ -50,7 +58,7 @@ Statyczna biblioteka SoundTouch.
 Summary:	SoundStretch - sound processing application
 Summary(pl):	SoundStretch - aplikacja do przetwarzania d¼wiêku
 Group:		Applications/Sound
-URL:		http://www.sunpoint.net/~oparviai/soundtouch/soundstretch.html
+URL:		http://sky.prohosting.com/oparviai/soundtouch/soundstretch.html
 Requires:	%{name} = %{version}-%{release}
 
 %description soundstretch
@@ -66,33 +74,30 @@ program ma tak¿e byæ przyk³adem, jak mo¿na wykorzystywaæ bibliotekê
 SoundTouch do przetwarzania d¼wiêku we w³asnych programach.
 
 %prep
-%setup -q -n SoundTouch
+%setup -q -n SoundTouch-%{version}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+
+# kill DOS eols
+%{__perl} -pi -e 's/\r$//' soundtouch.m4
 
 %build
-# try to abuse makefiles :)
-%{__make} -C source/SoundTouch -f makefile.gcc \
-	CC="libtool --mode=compile --tag=CXX %{__cxx}" \
-	FLAGS="-I../../include %{rpmcflags}" \
-	LINK=/bin/true
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure \
+	--enable-shared
 
-libtool --mode=link %{__cxx} %{rpmldflags} -o libSoundTouch.la \
-	source/SoundTouch/*.lo -rpath %{_libdir}
-
-%{__make} -C source/example/SoundStretch -f makefile.gcc \
-	main.o RunParameters.o WavFile.o BPMDetect.o PeakFinder.o \
-	CC="%{__cxx}" \
-	FLAGS="-I../../../include %{rpmcflags}"
-
-libtool --mode=link %{__cxx} %{rpmldflags} -o soundstretch \
-	source/example/SoundStretch/*.o libSoundTouch.la
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_bindir},%{_includedir}/SoundTouch}
 
-libtool --mode=install install libSoundTouch.la $RPM_BUILD_ROOT%{_libdir}
-libtool --mode=install install soundstretch $RPM_BUILD_ROOT%{_bindir}
-install include/*.h $RPM_BUILD_ROOT%{_includedir}/SoundTouch
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -102,14 +107,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.TXT
+%doc README.html
 %attr(755,root,root) %{_libdir}/lib*.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{_includedir}/SoundTouch
+%{_includedir}/soundtouch
+%{_aclocaldir}/soundtouch.m4
 
 %files static
 %defattr(644,root,root,755)
