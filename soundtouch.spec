@@ -10,7 +10,7 @@ Source0:	http://sky.prohosting.com/oparviai/soundtouch/%{name}_v%{version}.zip
 Patch0:		%{name}-am18.patch
 Patch1:		%{name}-optflags.patch
 Patch2:		%{name}-link.patch
-URL:		http://sky.prohosting.com/oparviai/soundtouch/
+URL:		http://www.iki.fi/oparviai/soundtouch/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
