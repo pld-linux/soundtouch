@@ -1,16 +1,15 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl):	SoundTouch - biblioteka do przetwarzania d¼wiêku
 Name:		soundtouch
-Version:	1.3.0
+Version:	1.3.1
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://sky.prohosting.com/oparviai/soundtouch/%{name}_v%{version}.zip
-# Source0-md5:	5c2d3f54320e5197885b3462f5f35a15
-Patch0:		%{name}-am18.patch
-Patch1:		%{name}-optflags.patch
-Patch2:		%{name}-link.patch
-URL:		http://sky.prohosting.com/oparviai/soundtouch/
+Source0:	http://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
+# Source0-md5:	5e0185e81dbba2f2eed8581b7664ab04
+Patch0:		%{name}-optflags.patch
+Patch1:		%{name}-link.patch
+URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
@@ -74,10 +73,9 @@ program ma tak¿e byæ przyk³adem, jak mo¿na wykorzystywaæ bibliotekê
 SoundTouch do przetwarzania d¼wiêku we w³asnych programach.
 
 %prep
-%setup -q -n SoundTouch-%{version}
+%setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 # kill DOS eols
 %{__perl} -pi -e 's/\r$//' soundtouch.m4
@@ -116,6 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.la
 %{_includedir}/soundtouch
 %{_aclocaldir}/soundtouch.m4
+%{_pkgconfigdir}/soundtouch-1.0.pc
 
 %files static
 %defattr(644,root,root,755)
