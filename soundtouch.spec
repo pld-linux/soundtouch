@@ -74,9 +74,7 @@ SoundTouch do przetwarzania d¼wiêku we w³asnych programach.
 
 %prep
 %setup -q
-%ifarch %{ix86} %{x8664}
 %patch0 -p1
-%endif
 %patch1 -p1
 
 # kill DOS eols
