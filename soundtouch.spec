@@ -1,5 +1,5 @@
 Summary:	SoundTouch - sound processing library
-Summary(pl):	SoundTouch - biblioteka do przetwarzania d¼wiêku
+Summary(pl.UTF-8):   SoundTouch - biblioteka do przetwarzania dÅºwiÄ™ku
 Name:		soundtouch
 Version:	1.3.1
 Release:	1
@@ -24,13 +24,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 SoundTouch is a library for changing tempo, pitch and playback rate of
 digital sound.
 
-%description -l pl
-SountTouch jest bibliotek± do zmiany tempa, wysoko¶ci i czêstotliwo¶ci
-odtwarzania d¼wiêku cyfrowego.
+%description -l pl.UTF-8
+SountTouch jest bibliotekÄ… do zmiany tempa, wysokoÅ›ci i czÄ™stotliwoÅ›ci
+odtwarzania dÅºwiÄ™ku cyfrowego.
 
 %package devel
 Summary:	Header files for SoundTouch library
-Summary(pl):	Pliki nag³ówkowe biblioteki SoundTouch
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe biblioteki SoundTouch
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -38,24 +38,24 @@ Requires:	libstdc++-devel
 %description devel
 Header files for SoundTouch library.
 
-%description devel -l pl
-Pliki nag³ówkowe biblioteki SoundTouch.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki SoundTouch.
 
 %package static
 Summary:	Static SoundTouch library
-Summary(pl):	Statyczna biblioteka SoundTouch
+Summary(pl.UTF-8):   Statyczna biblioteka SoundTouch
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static SoundTouch library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka SoundTouch.
 
 %package soundstretch
 Summary:	SoundStretch - sound processing application
-Summary(pl):	SoundStretch - aplikacja do przetwarzania d¼wiêku
+Summary(pl.UTF-8):   SoundStretch - aplikacja do przetwarzania dÅºwiÄ™ku
 Group:		Applications/Sound
 URL:		http://sky.prohosting.com/oparviai/soundtouch/soundstretch.html
 Requires:	%{name} = %{version}-%{release}
@@ -66,11 +66,11 @@ and playback rates of WAV sound files. This program also demonstrates
 how the "SoundTouch" library can be used to process sound in own
 programs.
 
-%description soundstretch -l pl
-SoundStretch to dzia³aj±ca z linii poleceñ aplikacja do zmiany tempa,
-wysoko¶ci i czêstotliwo¶ci odtwarzania plików d¼wiêkowych WAV. Ten
-program ma tak¿e byæ przyk³adem, jak mo¿na wykorzystywaæ bibliotekê
-SoundTouch do przetwarzania d¼wiêku we w³asnych programach.
+%description soundstretch -l pl.UTF-8
+SoundStretch to dziaÅ‚ajÄ…ca z linii poleceÅ„ aplikacja do zmiany tempa,
+wysokoÅ›ci i czÄ™stotliwoÅ›ci odtwarzania plikÃ³w dÅºwiÄ™kowych WAV. Ten
+program ma takÅ¼e byÄ‡ przykÅ‚adem, jak moÅ¼na wykorzystywaÄ‡ bibliotekÄ™
+SoundTouch do przetwarzania dÅºwiÄ™ku we wÅ‚asnych programach.
 
 %prep
 %setup -q
