@@ -1,5 +1,5 @@
 Summary:	SoundTouch - sound processing library
-Summary(pl.UTF-8):   SoundTouch - biblioteka do przetwarzania dźwięku
+Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
 Version:	1.3.1
 Release:	1
@@ -30,7 +30,7 @@ odtwarzania dźwięku cyfrowego.
 
 %package devel
 Summary:	Header files for SoundTouch library
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki SoundTouch
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki SoundTouch
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -43,7 +43,7 @@ Pliki nagłówkowe biblioteki SoundTouch.
 
 %package static
 Summary:	Static SoundTouch library
-Summary(pl.UTF-8):   Statyczna biblioteka SoundTouch
+Summary(pl.UTF-8):	Statyczna biblioteka SoundTouch
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -55,7 +55,7 @@ Statyczna biblioteka SoundTouch.
 
 %package soundstretch
 Summary:	SoundStretch - sound processing application
-Summary(pl.UTF-8):   SoundStretch - aplikacja do przetwarzania dźwięku
+Summary(pl.UTF-8):	SoundStretch - aplikacja do przetwarzania dźwięku
 Group:		Applications/Sound
 URL:		http://sky.prohosting.com/oparviai/soundtouch/soundstretch.html
 Requires:	%{name} = %{version}-%{release}
