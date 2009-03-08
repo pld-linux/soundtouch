@@ -1,3 +1,7 @@
+#
+# TODO:
+# - fix x86_64 build
+#
 Summary:	SoundTouch - sound processing library
 Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
