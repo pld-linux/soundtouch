@@ -1,19 +1,18 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
-Version:	1.3.1
-Release:	5
+Version:	1.4.0
+Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
-# Source0-md5:	5e0185e81dbba2f2eed8581b7664ab04
-Patch0:		%{name}-optflags.patch
-Patch1:		%{name}-link.patch
+# Source0-md5:	fc4bb10401624899efe4fb554d4fd3ed
 URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
+BuildRequires:	pkgconfig
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -73,9 +72,7 @@ program ma także być przykładem, jak można wykorzystywać bibliotekę
 SoundTouch do przetwarzania dźwięku we własnych programach.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
+%setup -q -n %{name}
 
 # kill DOS eols
 %{__perl} -pi -e 's/\r$//' soundtouch.m4
@@ -106,7 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.html
-%attr(755,root,root) %{_libdir}/lib*.so.*.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*
 
 %files devel
 %defattr(644,root,root,755)
@@ -114,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.la
 %{_includedir}/soundtouch
 %{_aclocaldir}/soundtouch.m4
-%{_pkgconfigdir}/soundtouch-1.0.pc
+%{_pkgconfigdir}/soundtouch-*.pc
 
 %files static
 %defattr(644,root,root,755)
