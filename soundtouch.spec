@@ -7,10 +7,11 @@ Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
 Version:	1.4.0
 Release:	1
-License:	LGPL
+License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
 # Source0-md5:	fc4bb10401624899efe4fb554d4fd3ed
+Patch0:		%{name}-nosse.patch
 URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -77,6 +78,7 @@ SoundTouch do przetwarzania dźwięku we własnych programach.
 
 %prep
 %setup -q -n %{name}
+%patch0 -p1
 
 # kill DOS eols
 %{__perl} -pi -e 's/\r$//' soundtouch.m4
@@ -107,19 +109,20 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.html
-%attr(755,root,root) %{_libdir}/lib*.so.*
+%attr(755,root,root) %{_libdir}/libSoundTouch.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libSoundTouch.so.0
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
+%attr(755,root,root) %{_libdir}/libSoundTouch.so
+%{_libdir}/libSoundTouch.la
 %{_includedir}/soundtouch
 %{_aclocaldir}/soundtouch.m4
-%{_pkgconfigdir}/soundtouch-*.pc
+%{_pkgconfigdir}/soundtouch-1.4.pc
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libSoundTouch.a
 
 %files soundstretch
 %defattr(644,root,root,755)
