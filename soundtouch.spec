@@ -1,18 +1,23 @@
+#
+# Conditional build:
+%bcond_without	gomp		# OpenMP support
+%bcond_without	static_libs	# static library
+#
 Summary:	SoundTouch - sound processing library
 Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
-Version:	1.4.0
-Release:	5
+Version:	1.9.2
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
+#Source0Download: http://www.surina.net/soundtouch/sourcecode.html
 Source0:	http://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
-# Source0-md5:	fc4bb10401624899efe4fb554d4fd3ed
-Patch0:		%{name}-nosse.patch
-Patch1:		%{name}-x86_64.patch
+# Source0-md5:	2d1ab4abb54640e8e308e36e309c94a6
 URL:		http://www.surina.net/soundtouch/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-BuildRequires:	libstdc++-devel
+%{?with_gomp:BuildRequires:	libgomp-devel}
+BuildRequires:	libstdc++-devel >= 6:4.3
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
 BuildRequires:	unzip
@@ -58,7 +63,7 @@ Statyczna biblioteka SoundTouch.
 Summary:	SoundStretch - sound processing application
 Summary(pl.UTF-8):	SoundStretch - aplikacja do przetwarzania dźwięku
 Group:		Applications/Sound
-URL:		http://sky.prohosting.com/oparviai/soundtouch/soundstretch.html
+URL:		http://www.surina.net/soundtouch/soundstretch.html
 Requires:	%{name} = %{version}-%{release}
 
 %description soundstretch
@@ -75,11 +80,6 @@ SoundTouch do przetwarzania dźwięku we własnych programach.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
-%patch1 -p1
-
-# kill DOS eols
-%{__perl} -pi -e 's/\r$//' soundtouch.m4
 
 %build
 %{__libtoolize}
@@ -88,7 +88,9 @@ SoundTouch do przetwarzania dźwięku we własnych programach.
 %{__autoheader}
 %{__automake}
 %configure \
-	--enable-shared
+	%{?with_gomp:--enable-openmp} \
+	--disable-silent-rules \
+	%{?with_static_libs:--enable-static}
 
 %{__make}
 
@@ -108,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.html
 %attr(755,root,root) %{_libdir}/libSoundTouch.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libSoundTouch.so.0
+%attr(755,root,root) %ghost %{_libdir}/libSoundTouch.so.1
 
 %files devel
 %defattr(644,root,root,755)
@@ -116,11 +118,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libSoundTouch.la
 %{_includedir}/soundtouch
 %{_aclocaldir}/soundtouch.m4
-%{_pkgconfigdir}/soundtouch-1.4.pc
+%{_pkgconfigdir}/soundtouch.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libSoundTouch.a
+%endif
 
 %files soundstretch
 %defattr(644,root,root,755)
