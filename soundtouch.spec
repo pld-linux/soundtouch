@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	gomp		# OpenMP support
+%bcond_without	openmp		# OpenMP support
 %bcond_without	static_libs	# static library
 #
 Summary:	SoundTouch - sound processing library
@@ -16,7 +16,7 @@ Source0:	http://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
 URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
-%{?with_gomp:BuildRequires:	libgomp-devel}
+%{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libstdc++-devel >= 6:4.3
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
@@ -88,7 +88,7 @@ SoundTouch do przetwarzania dźwięku we własnych programach.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{?with_gomp:--enable-openmp} \
+	%{?with_openmp:--enable-openmp} \
 	--disable-silent-rules \
 	%{?with_static_libs:--enable-static}
 
