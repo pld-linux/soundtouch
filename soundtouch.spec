@@ -6,16 +6,20 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
-Version:	2.0.0
+Version:	2.1.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-#Source0Download: http://www.surina.net/soundtouch/sourcecode.html
-Source0:	http://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
-# Source0-md5:	9f5eaf7b767970c2dbc75b7a443ec15a
+#Source0Download: https://gitlab.com/soundtouch/soundtouch/tags
+Source0:	https://gitlab.com/soundtouch/soundtouch/-/archive/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	c86cbd3ac6978aa4111302c085641f78
 URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
+%ifarch %{ix86} %{x8664} x32
+# <cpuid.h>
+BuildRequires:	gcc >= 6:4.3
+%endif
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libstdc++-devel >= 6:4.3
 BuildRequires:	libtool >= 2:1.5
@@ -79,7 +83,7 @@ program ma także być przykładem, jak można wykorzystywać bibliotekę
 SoundTouch do przetwarzania dźwięku we własnych programach.
 
 %prep
-%setup -q -n %{name}
+%setup -q
 
 %build
 %{__libtoolize}
