@@ -6,13 +6,13 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
-Version:	2.3.1
+Version:	2.3.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://codeberg.org/soundtouch/soundtouch
 Source0:	https://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
-# Source0-md5:	f9690985eee4778706a51d06aa935f6a
+# Source0-md5:	058db201df6151e3cbd07dc8929885c4
 URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -83,7 +83,7 @@ program ma także być przykładem, jak można wykorzystywać bibliotekę
 SoundTouch do przetwarzania dźwięku we własnych programach.
 
 %prep
-%setup -q
+%setup -q -n %{name}
 
 %build
 %{__libtoolize}
@@ -115,11 +115,16 @@ rm -rf $RPM_BUILD_ROOT
 %doc README.html
 %attr(755,root,root) %{_libdir}/libSoundTouch.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libSoundTouch.so.1
+%attr(755,root,root) %{_libdir}/libSoundTouchDll.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libSoundTouchDll.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libSoundTouch.so
+%attr(755,root,root) %{_libdir}/libSoundTouchDll.so
 %{_libdir}/libSoundTouch.la
+%{_libdir}/libSoundTouchDll.la
+%{_includedir}/SoundTouchDLL.h
 %{_includedir}/soundtouch
 %{_aclocaldir}/soundtouch.m4
 %{_pkgconfigdir}/soundtouch.pc
