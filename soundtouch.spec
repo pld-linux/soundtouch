@@ -6,13 +6,13 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
-Version:	2.3.2
+Version:	2.3.3
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://codeberg.org/soundtouch/soundtouch
 Source0:	https://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
-# Source0-md5:	058db201df6151e3cbd07dc8929885c4
+# Source0-md5:	489c1050315965f69a9c0ad949744d73
 URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
