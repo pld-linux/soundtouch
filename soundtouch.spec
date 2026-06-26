@@ -6,23 +6,23 @@
 Summary:	SoundTouch - sound processing library
 Summary(pl.UTF-8):	SoundTouch - biblioteka do przetwarzania dźwięku
 Name:		soundtouch
-Version:	2.3.3
+Version:	2.4.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 #Source0Download: https://codeberg.org/soundtouch/soundtouch
 Source0:	https://www.surina.net/soundtouch/%{name}-%{version}.tar.gz
-# Source0-md5:	489c1050315965f69a9c0ad949744d73
+# Source0-md5:	6e8732dea92b6e65fc4ee75528ab0524
 URL:		http://www.surina.net/soundtouch/
 BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.11
 %ifarch %{ix86} %{x8664} x32
 # <cpuid.h>
 BuildRequires:	gcc >= 6:4.3
 %endif
 %{?with_openmp:BuildRequires:	libgomp-devel}
 BuildRequires:	libstdc++-devel >= 6:4.3
-BuildRequires:	libtool >= 2:1.5
+BuildRequires:	libtool >= 2:2
 BuildRequires:	pkgconfig
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -113,15 +113,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.html
-%attr(755,root,root) %{_libdir}/libSoundTouch.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libSoundTouch.so.1
-%attr(755,root,root) %{_libdir}/libSoundTouchDll.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libSoundTouchDll.so.1
+%{_libdir}/libSoundTouch.so.*.*.*
+%ghost %{_libdir}/libSoundTouch.so.1
+%{_libdir}/libSoundTouchDll.so.*.*.*
+%ghost %{_libdir}/libSoundTouchDll.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libSoundTouch.so
-%attr(755,root,root) %{_libdir}/libSoundTouchDll.so
+%{_libdir}/libSoundTouch.so
+%{_libdir}/libSoundTouchDll.so
 %{_libdir}/libSoundTouch.la
 %{_libdir}/libSoundTouchDll.la
 %{_includedir}/SoundTouchDLL.h
